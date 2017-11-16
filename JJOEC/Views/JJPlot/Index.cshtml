@@ -1,0 +1,100 @@
+﻿@model IEnumerable<JJOEC.Models.Plot>
+@using Microsoft.AspNetCore.Http
+
+@{
+    if (Context.Session.GetString("varietyId") != null)
+    {
+        ViewData["Title"] = $"Plots List of {Context.Session.GetString("varietyName")}" +
+                    $" in {Context.Session.GetString("cropName")}";
+    }
+    else if(Context.Session.GetString("cropId") != null)
+    {
+        ViewData["Title"] = $"Plots List of {Context.Session.GetString("cropName")}";
+    }
+    else
+    {
+        ViewData["Title"] = $"Plots List of ALL";
+    }
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-controller="JJPlot"
+                   asp-route-orderType="Farm" 
+                   asp-route-varietyId=@Context.Session.GetString("varietyId") 
+                   asp-route-varietyName=@Context.Session.GetString("varietyName")>Farm Name</a>
+            </th>
+            <th>
+                Crop Name
+            </th>
+            <th>
+                <a asp-action="Index" asp-controller="JJPlot" asp-route-orderType="Variety" 
+                   asp-route-varietyId=@Context.Session.GetString("varietyId") 
+                   asp-route-varietyName=@Context.Session.GetString("varietyName")>Variety Name</a>
+            </th>
+            <th>
+                Date Planted
+            </th>
+            <th>
+                <a asp-action="Index" asp-controller="JJPlot" asp-route-orderType="CEC" 
+                   asp-route-varietyId=@Context.Session.GetString("varietyId") 
+                   asp-route-varietyName=@Context.Session.GetString("varietyName")>CEC</a>
+            </th>
+            <th>
+                Treatment Names
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Farm.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Variety.Crop.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Variety.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DatePlanted)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Cec)
+            </td>
+
+            <td> 
+                @foreach (var treatmentItem in item.Treatment)
+                    {
+                        @treatmentItem.Name<br/>
+                    }
+            </td>
+
+            <td>
+                <a asp-action="Index" asp-controller="JJTreatment"
+                   asp-route-plotId="@item.PlotId"
+                   asp-route-farmName="@item.Farm.Name">Manage treatments</a> <br />
+                <a asp-action="Edit" asp-route-id="@item.PlotId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PlotId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PlotId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

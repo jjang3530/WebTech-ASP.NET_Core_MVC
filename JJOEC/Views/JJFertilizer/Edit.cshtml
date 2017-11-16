@@ -1,0 +1,49 @@
+﻿@model JJOEC.Models.Fertilizer
+
+@{
+    ViewData["Title"] = "Edit Fertilizer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Fertilizer</h2>
+
+<h4>Fertilizer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="FertilizerName" />
+            <div class="form-group">
+                <label asp-for="FertilizerName" class="control-label"></label>
+                <input asp-for="FertilizerName" class="form-control" readonly/>
+                <span asp-validation-for="FertilizerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Oecproduct" /> @Html.DisplayNameFor(model => model.Oecproduct)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Liquid" /> @Html.DisplayNameFor(model => model.Liquid)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

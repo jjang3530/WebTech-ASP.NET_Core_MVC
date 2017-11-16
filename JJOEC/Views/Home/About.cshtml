@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>Use this area to provide additional information.</p>
+
+
+
+@*@{
+    ViewData["Title"] = "About";
+}
+<h2>@ViewData["Title"].</h2>
+
+<h3>This is @@ViewData["message"] just dumped on the page:</h3>
+<p> @ViewData["Message"]</p>
+<h3>This is ViewData["message"] dumped without the "@@":</h3>
+<p> ViewData["Message"]</p>
+<h3>This is ViewData["message"] in a command to turn off html-encode:</h3>
+<p>@Html.Raw(ViewData["Message"])</p>
+
+<p>
+    Using "@@" causes the Razor engine to shift to code view.  If the word immediately after
+    "@@" is a C# command, it'll execute it.  If not, it'll assume it to be a variable and
+    return its value to the page.
+</p>
+<p>
+    Razor HTML-encodes variable data so "nasties" don't put &lt;script&gt; on your database
+    to send to other users.
+</p>*@

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<JJOEC.Models.Crop>
+@using Microsoft.AspNetCore.Http
+
+@{
+    ViewData["Title"] = "Crop Listing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @*Hyperlin to passes cripID and cropName*@
+                <a asp-action="Index" asp-controller="JJVariety" asp-route-cropId="@item.CropId" asp-route-cropName="@item.Name ">@Html.DisplayFor(modelItem => item.Name)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @*Add show plots to passes cripID and cropName*@
+                <a asp-action="Index" asp-controller="JJPlot" asp-route-identifyCriteria="C" asp-route-cropId="@item.CropId" asp-route-cropName="@item.Name">Show Plots</a> |
+                <a asp-action="Edit" asp-route-id="@item.CropId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CropId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CropId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
