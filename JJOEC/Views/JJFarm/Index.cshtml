@@ -1,0 +1,102 @@
+﻿@model IEnumerable<JJOEC.Models.Farm>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Farm Listing</h2>
+
+<p>
+    <a asp-action="Create">Add Farm</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    Farm Name
+                </th>
+                <!--<th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>-->
+                <th>
+                    @Html.DisplayNameFor(model => model.Town)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.County)
+                </th>
+                <!--<th>
+                    @Html.DisplayNameFor(model => model.PostalCode)
+                </th>-->
+                <th>
+                    @Html.DisplayNameFor(model => model.HomePhone)
+                </th>
+                <!--<th>
+                    @Html.DisplayNameFor(model => model.CellPhone)
+                </th>-->
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <!--<th>
+                    @Html.DisplayNameFor(model => model.Directions)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateJoined)
+                </th>-->
+                <th>
+                    Last Contact
+                </th>
+                <th>
+                    Province
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <!--<td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>-->
+            <td>
+                @Html.DisplayFor(modelItem => item.Town)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.County)
+            </td>
+            <!--<td>
+                @Html.DisplayFor(modelItem => item.PostalCode)
+            </td>-->
+            <td>
+                @Html.DisplayFor(modelItem => item.HomePhone)
+            </td>
+            <!--<td>
+                @Html.DisplayFor(modelItem => item.CellPhone)
+            </td>-->
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <!--<td>
+                @Html.DisplayFor(modelItem => item.Directions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateJoined)
+            </td>-->
+            <td>
+                @Html.DisplayFor(modelItem => item.LastContactDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProvinceCodeNavigation.ProvinceCode)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.FarmId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.FarmId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.FarmId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
